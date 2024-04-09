@@ -1,0 +1,51 @@
+# Query - Me sirve solo para hacer consultas
+type Query {
+    # Students
+    findStudentById(studentId: String) : Student, #Se crea el tipo de dato Student para representar todos los estudiantes que estarán dentro de esta consulta, aqui se llama el objeto Student
+    findAllStudents : [Student]
+
+    # Courses
+    findCourseById(courseId: String) : Course,
+    findAllCourses : [Course]
+}
+
+type Mutation {
+    # Students
+    createStudent(inputStudent: InputStudent!) : Student,
+    deleteStudentById(studentId: String) : String
+
+    # Courses
+    createCourse(inputCourse: InputCourse!) : Course
+    deleteCourseById(courseId: String) : String
+}
+
+type Student { #Estos datos son los que se traerán como lo indicamos en el Query
+    id: ID,
+    name: String,
+    lastName: String,
+    age: Int,
+    course: Course
+}
+
+input InputStudent {
+    id: ID,
+    name: String,
+    lastName: String,
+    age: Int,  
+    courseId: String! #Es obligtorio asignar un estudiante a un respectivo curso
+}
+
+
+type Course {
+    id: ID,
+    name: String,
+    category: String,
+    teacher: String
+}
+
+input InputCourse {
+    id: ID,
+    name: String,
+    category: String,
+    teacher: String
+}
